@@ -77,6 +77,7 @@ async function _render (string, stringIsHTML = true, opts = {}) {
    return WithTempDir(async (tmpdir) => {
       const browser = await puppeteer.launch({headless: true, executablePath: "/usr/bin/chromium-browser", args: ['--no-sandbox']});
       const page = await browser.newPage();
+      await page.emulateMedia('screen');
       // Load content
       if (stringIsHTML) {
          await page.setContent(string, {waitUntil: waitUntil}); // string = html doc as string
